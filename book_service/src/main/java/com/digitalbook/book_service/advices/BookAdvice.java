@@ -11,15 +11,6 @@ public class BookAdvice {
 
     @ExceptionHandler(BookException.class)
     public ResponseEntity<?> handleBookException(BookException bookException) {
-
-//		errorRep...
-
-//		return new ResponseEntity<ErrorMessage>(new ErrorMessage(
-//				"MovieException: "+me.getMessage(),
-//				me.getClass().toString(),
-//				"Something bad happened, please try after some time"
-//			), HttpStatus.OK);
-
         return new ResponseEntity<String>("BookException: "+bookException.getMessage(), HttpStatus.OK);
     }
 }

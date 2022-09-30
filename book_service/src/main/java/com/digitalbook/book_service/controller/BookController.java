@@ -3,6 +3,7 @@ package com.digitalbook.book_service.controller;
 import com.digitalbook.book_service.entity.Book;
 import com.digitalbook.book_service.entity.Purchase;
 import com.digitalbook.book_service.exception.BookException;
+import com.digitalbook.book_service.repository.PurchaseRepository;
 import com.digitalbook.book_service.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,17 @@ public class BookController {
     @PostMapping("/buy")
     public Long buyBook(@RequestBody Purchase purchase) throws BookException {
         return bookService.buyBook(purchase);
+    }
+    
+    @PostMapping("/create-book")
+    public Book createBook(@RequestBody Book book) {
+    	return bookService.save(book);
+    }
+    
+    @GetMapping("/fetchByMail")
+    public List<Book> fetchByMail(@RequestParam String mailId){
+    	return bookService.fetchPurchasedBooks(mailId);
+    	
     }
 
 }
