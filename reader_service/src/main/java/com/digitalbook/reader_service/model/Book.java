@@ -1,9 +1,5 @@
 package com.digitalbook.reader_service.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
 public class Book {
@@ -18,6 +14,7 @@ public class Book {
     private String publisher;
     private LocalDate publishedDate;
     private String content;
+    private boolean active;
 
     public Book(String logo , String title, String category, Double price ,String author, String publisher, LocalDate publishedDate, String content, boolean active) {
     	this.logo = logo;
@@ -28,6 +25,7 @@ public class Book {
         this.publisher = publisher;
         this.publishedDate = publishedDate;
         this.content = content;
+        this.active = active;
     }
 
     public Book() {
@@ -106,11 +104,11 @@ public class Book {
         this.content = content;
     }
 
-//    public boolean isActive() {
-//        return active;
-//    }
-//
-//    public void setActive(boolean active) {
-//        this.active = active;
-//    }
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

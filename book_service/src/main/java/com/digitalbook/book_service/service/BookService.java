@@ -9,6 +9,8 @@ import com.digitalbook.book_service.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,8 +52,50 @@ public class BookService {
 
 	public List<Book> fetchPurchasedBooks(String mailId) {
 		List<Purchase> purchases = purchaseRepository.findByEmail(mailId);
-		List<Book> books = purchases.stream().map(purchase -> bookRepository.findById(purchase.getBookId()).get()).collect(Collectors.toList());
+		List<Book> books = purchases.stream().map(purchase -> bookRepository.findById(purchase.getBookId()).get()).filter(book -> book.isActive() == true).collect(Collectors.toList());
 		System.out.println(books);
 		return books;
+	}
+
+	public List<Book> fetchByMailAndBookId(String mailId, Long bookId) throws BookException {
+		List<Purchase> purchases = purchaseRepository.findByEmail(mailId);
+		List<Book> books = purchases.stream().map(purchase -> bookRepository.findById(purchase.getBookId()).get())
+				.filter(book -> {
+					return book.isActive() == true && book.getId().equals(bookId);
+				}).collect(Collectors.toList());
+		System.out.println(books);
+		if(books.isEmpty()) {
+			throw new BookException("No active books for the use!!");
+		}
+		return books;
+	}
+
+	public List<Book> fetchByMailAndPaymentId(String mailId, Long paymentId) {
+		List<Purchase> purchases = purchaseRepository.findByEmail(mailId);
+		List<Book> books = purchases.stream()
+				.filter(purchase -> purchase.getPurchaseId().equals(paymentId))
+				.map(purchase -> bookRepository.findById(purchase.getBookId()).get())
+				.filter(book -> book.isActive()).collect(Collectors.toList());
+		System.out.println(books);
+		if(books.isEmpty()) {
+			System.out.println("No active books for the use!!");
+		}
+		return books;
+	}
+ 
+	public String doRefund(String mailId, Long bookId) {
+		Purchase purchased = purchaseRepository.findByEmail(mailId)
+				.stream()
+				.filter(purchase -> purchase.getBookId().equals(bookId))
+				.collect(Collectors.toList()).get(0);
+		
+		Duration duration = Duration.between(purchased.getPurchasedDate(), LocalDateTime.now());
+		if(duration.toHours() <= 24) {
+			purchaseRepository.deleteById(purchased.getPurchaseId());
+		} else {
+			return "Refund time exceeded!!";
+		}
+		
+		return "refunded";
 	}
 }

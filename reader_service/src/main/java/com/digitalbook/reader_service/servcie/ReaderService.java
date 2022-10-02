@@ -17,6 +17,18 @@ public class ReaderService {
 	public List<Book> getPurchasedBooks(String mailId) {
 		return bookServiceClient.findPurchasedBooks(mailId);
 	}
-	
+
+	public List<Book> getPurchasedBookByID(String mailId, Long bookId) {
+		return bookServiceClient.getPurchasedBookByID(mailId , bookId);
+	}
+
+	public List<Book> getBooksByPurchaseId(String mailId, Long paymentId) {
+		return bookServiceClient.getBooksByPurchaseId(mailId , paymentId);
+	}
+
+	public String doRefund(String mailId, Long bookId) {
+		return bookServiceClient.doRefund(mailId, bookId);
+	}
+
 
 }

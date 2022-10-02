@@ -47,5 +47,20 @@ public class BookController {
     	return bookService.fetchPurchasedBooks(mailId);
     	
     }
+    @GetMapping("/fetchByMailAndBookId")
+    public List<Book> fetchByMailAndBookId(@RequestParam String mailId , @RequestParam Long bookId) throws BookException{
+    	return bookService.fetchByMailAndBookId(mailId , bookId);
+    	
+    }
+    @GetMapping("/fetchByMailAndPaymentId")
+    public List<Book> fetchByMailAndPaymentId(@RequestParam String mailId , @RequestParam Long paymentId) throws BookException{
+    	return bookService.fetchByMailAndPaymentId(mailId , paymentId);
+    	
+    }
+    @GetMapping("/refund")
+    public String doRefund(@RequestParam String mailId , @RequestParam Long bookId) throws BookException{
+    	return bookService.doRefund(mailId , bookId);
+    	
+    }
 
 }

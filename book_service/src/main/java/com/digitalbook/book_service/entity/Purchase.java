@@ -1,9 +1,16 @@
 package com.digitalbook.book_service.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class Purchase {
@@ -14,6 +21,9 @@ public class Purchase {
 	
 	private String email;
 	private String name;
+	
+	@CreationTimestamp
+	private LocalDateTime purchasedDate;
 	
 	private Long bookId;
 
@@ -48,8 +58,9 @@ public class Purchase {
 	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
-	
-	
-	
+
+	public LocalDateTime getPurchasedDate() {
+		return purchasedDate;
+	}	
 
 }
