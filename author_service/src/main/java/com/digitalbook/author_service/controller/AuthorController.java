@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalbook.author_service.entity.Author;
-import com.digitalbook.author_service.model.Book;
 import com.digitalbook.author_service.model.JwtResponse;
 import com.digitalbook.author_service.service.AuthorService;
 import com.digitalbook.author_service.utils.JwtTokenUtil;
+import com.digitalbook.book_service.entity.Book;
 
 @RestController
 @RequestMapping("/api/v1/digitalbooks/author")
@@ -46,6 +47,14 @@ public class AuthorController {
 		return authorService.createBook(authorId , book);
 		
 	}
+	
+	@PutMapping("/{authorId}/books/{bookId}")
+	public String editBook(@PathVariable Long authorId ,
+			@PathVariable Long bookId , 
+			@RequestBody Book book) throws Exception {
+		return authorService.editBook(authorId ,bookId, book);	
+	}
+	
 	@PostMapping("/signup")
 	public Author signup(@RequestBody Author author) throws Exception {
 		System.out.println(author.getUsername());

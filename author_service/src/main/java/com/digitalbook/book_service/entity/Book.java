@@ -1,4 +1,4 @@
-package com.digitalbook.author_service.model;
+package com.digitalbook.book_service.entity;
 
 import java.time.LocalDate;
 

@@ -10,4 +10,8 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	
 	public List<Purchase> findByEmail(String mailId);
 
+	public List<Purchase> findByBookId(Long id);
+	
+//	public void deleteByBookId(Long bookId);
+
 }

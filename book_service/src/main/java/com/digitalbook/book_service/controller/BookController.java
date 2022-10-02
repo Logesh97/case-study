@@ -1,15 +1,20 @@
 package com.digitalbook.book_service.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.digitalbook.book_service.entity.Book;
 import com.digitalbook.book_service.entity.Purchase;
 import com.digitalbook.book_service.exception.BookException;
-import com.digitalbook.book_service.repository.PurchaseRepository;
 import com.digitalbook.book_service.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/digitalbooks/books")
@@ -40,6 +45,10 @@ public class BookController {
     @PostMapping("/create-book")
     public Book createBook(@RequestBody Book book) {
     	return bookService.save(book);
+    }
+    @PutMapping("/edit-book")
+    public String editBook(@RequestBody Book book) throws BookException {
+    	return bookService.editBook(book);
     }
     
     @GetMapping("/fetchByMail")

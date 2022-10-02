@@ -1,8 +1,9 @@
 package com.digitalbook.book_service.repository;
 
-import com.digitalbook.book_service.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import com.digitalbook.book_service.entity.Book;
 
 import java.util.List;
 

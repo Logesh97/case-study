@@ -7,6 +7,7 @@ import com.digitalbook.book_service.repository.BookRepository;
 import com.digitalbook.book_service.repository.PurchaseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -22,6 +23,8 @@ public class BookService {
     
     @Autowired
     PurchaseRepository purchaseRepository;
+    
+    public static final String TOPIC = "digital-books";
 
     public List<Book> findBooksByParams(String category , String author , Double price , String publisher) throws BookException {
 //        if(category != null && author != null && price  != null && publisher != null){
@@ -43,6 +46,13 @@ public class BookService {
 
 	public List<Book> findAllBooks() {
 		return bookRepository.findAll();
+	}
+	
+	@KafkaListener(topics = TOPIC, groupId="group_id", containerFactory = "userKafkaListenerFactory")
+	public void consumeBook(Book book) {
+		System.out.println(book.getTitle() +" yet to be published..");
+		save(book);
+		System.out.println("Book saved in book service!!");
 	}
 	
 	public Book save(Book book) {
@@ -84,18 +94,71 @@ public class BookService {
 	}
  
 	public String doRefund(String mailId, Long bookId) {
-		Purchase purchased = purchaseRepository.findByEmail(mailId)
+		List<Purchase> purchased = purchaseRepository.findByEmail(mailId)
 				.stream()
 				.filter(purchase -> purchase.getBookId().equals(bookId))
-				.collect(Collectors.toList()).get(0);
+				.collect(Collectors.toList());
 		
-		Duration duration = Duration.between(purchased.getPurchasedDate(), LocalDateTime.now());
-		if(duration.toHours() <= 24) {
-			purchaseRepository.deleteById(purchased.getPurchaseId());
-		} else {
-			return "Refund time exceeded!!";
+		for(Purchase purchase : purchased) {
+			Duration duration = Duration.between(purchase.getPurchasedDate(), LocalDateTime.now());
+			if(duration.toHours() <= 24) {
+				purchaseRepository.deleteById(purchase.getPurchaseId());
+			} else {
+				return "Refund time limit exceeded!!";
+			}
 		}
-		
 		return "refunded";
 	}
+
+	public String editBook(Book book) throws BookException {
+		Optional<Book> updatedBookOptional = bookRepository.findById(book.getId());
+		Book updatedBook;
+		if(updatedBookOptional.isPresent()) {
+			updatedBook = updatedBookOptional.get();
+			if(book.getTitle() != null) {
+				updatedBook.setTitle(book.getTitle());
+			}
+			if(book.getCategory() != null) {
+				updatedBook.setCategory(book.getCategory());
+			}
+			if(book.getContent() != null) {
+				updatedBook.setContent(book.getContent());
+			}
+			if(book.getLogo() != null) {
+				updatedBook.setLogo(book.getLogo());
+			}
+			if(book.getPrice() != null) {
+				updatedBook.setPrice(book.getPrice());
+			}
+			if(book.getPublisher() != null) {
+				updatedBook.setPublisher(book.getPublisher());
+			}
+			if(book.getPublishedDate() != null) {
+				updatedBook.setPublishedDate(book.getPublishedDate());
+			}
+			if(book.isActive() != updatedBook.isActive()) {
+				updatedBook.setActive(book.isActive());
+			}
+			
+			bookRepository.save(updatedBook);
+			
+		}else {
+			throw new BookException("Book not found!!");
+		}
+		return "Book updated successFully!!";
+	}
+	
+	@KafkaListener(topics = "Notification", groupId="group_id", containerFactory = "userKafkaListenerFactory")
+	public void ConsumeNotification(Book book) {
+		System.out.println(book.getTitle() +" received from kafka..");
+		Book notifyBook = bookRepository.findById(book.getId()).get();
+		if(book.isActive() != notifyBook.isActive()) {
+			List<Purchase> purchaseList = purchaseRepository.findByBookId(book.getId());
+			purchaseList.forEach(purchase -> {
+				System.out.println("Notification mail sent to "+purchase.getEmail());
+			});
+		}
+		System.out.println("Notification sent!!");
+	}
+	
 }
