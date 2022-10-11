@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SearchBookComponent } from './searchBook/searchBook.component';
+import { HomeComponent } from 'src/app/component/home/home.component';
+import { ButtonComponent } from 'src/app/component/button/button.component';
+import { CreateBookComponent } from './create-book/create-book.component';
+import { MyBooksComponent } from './my-books/my-books.component';
+
+const routes:Routes = [
+  {path:'searchBooks' , component : SearchBookComponent}
+];
+
+@NgModule({
+    declarations: [
+      SearchBookComponent,
+      // ButtonComponent,
+      // HomeComponent
+    ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+  ]
+})
+export class BookModule { }

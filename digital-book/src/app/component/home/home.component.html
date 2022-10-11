@@ -1,0 +1,10 @@
+<h2>Welcome {{username}}</h2>
+<div class="books">
+    <!-- {{books}} -->
+    <div class="card" *ngFor="let book of books ; let id = index;">
+        {{book.title}} <br>
+        {{book.author}} <br>
+        {{book.price}} <br>
+        <app-button [bgColor]="'palegreen'" (click) = "purchaseBook(book)">purchase</app-button>
+    </div>
+</div>

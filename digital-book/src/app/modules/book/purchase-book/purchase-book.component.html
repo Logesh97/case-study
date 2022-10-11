@@ -1,0 +1,24 @@
+<p>purchase-book works!</p>
+
+<div class="purchase">
+    <form [formGroup] = "purchaseForm">
+      <label for="bookId">Book Id</label>
+      <input formControlName="bookId" id="bookId" type="text" readOnly="true" placeholder="Book Id"/>
+      <br>
+      <label for="name">Name</label>
+      <input formControlName="name" id="name" type="text" placeholder="name"/>
+      <br>
+      <label for="email">Mail ID</label>
+      <input formControlName="email" #email id="email" type="text" placeholder="mail Id"/>
+      <br>
+      <input type="button" value ="purchase" (click) = "purchase()"/>
+    </form>
+   </div>
+   <div *ngIf="!!book">
+       <h2 >Your purchase done successfully</h2> <br><br>
+       Purchase ID : {{purchaseId}} <br><br>
+       Book ID : {{book.id}} <br><br>
+       Book title : {{book.title}} <br><br>
+       mail ID : {{email.value}} <br><br>
+
+   </div>

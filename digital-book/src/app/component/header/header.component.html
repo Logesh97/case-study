@@ -1,0 +1,26 @@
+<div class="header" style="font-family: 'Pacifico', cursive;">
+    <div class="logo-container">
+        <img src="./../../../assets/logo.png" class="logo"/>
+        <h1 style="display: inline-block;">{{title}}</h1>
+    </div>
+{{authorMode}}
+    <app-button [bgColor] = "'#e6ebf1'" >
+        <a routerLink="book/searchBooks" style="text-decoration: none;">search</a>
+    </app-button>
+    <app-button [bgColor] = "'#e6ebf1'" *ngIf="authorMode">
+        <a routerLink="user/logIn" style="text-decoration: none;">log in</a>
+    </app-button>
+    <app-button [bgColor] = "'#e6ebf1'" *ngIf="authorMode">
+        <a routerLink="user/signUp" style="text-decoration: none;">sign up</a>
+    </app-button>
+    <app-button [bgColor] = "'#e6ebf1'"  *ngIf="!authorMode" (click) = "signout()">
+        <a routerLink="home" style="text-decoration: none;">sign out</a>
+    </app-button>
+    <app-button [bgColor] = "'#e6ebf1'"  *ngIf="!authorMode">
+        <a routerLink="create-book" style="text-decoration: none;">create book</a>
+    </app-button>
+    <app-button [bgColor] = "'#e6ebf1'"  *ngIf="!authorMode">
+        <a routerLink="my-book" style="text-decoration: none;">My books</a>
+    </app-button>
+    
+</div>

@@ -1,0 +1,37 @@
+<p>create-book works!</p>
+<div class="create-book">
+    <form [formGroup]="createBookForm">
+        <label for="logo">Logo</label>
+        <input formControlName="logo" id="logo" type="text" placeholder="logo"/>
+        <br>
+        <label for="title">Title</label>
+        <input formControlName="title" id="title" type="text" placeholder="Title"/>
+        <br>
+        <label for="category">Category</label>
+        <input formControlName="category" id="category" type="text" placeholder="Category"/>
+        <br>
+        <label for="price">Price</label>
+        <input formControlName="price" id="price" type="number" placeholder="Price"/>
+        <br>
+        <label for="author">Author Name</label>
+        <input formControlName="author" id="author" type="text" readOnly="true" placeholder="Author"/>
+        <br>
+        <label for="publisher">publisher</label>
+        <input formControlName="publisher" id="publisher" type="text" placeholder="Publisher"/>
+        <br>
+        <label for="publishedDate">Published date</label>
+        <input formControlName="publishedDate" id="publishedDate" type="date" placeholder="publishedDate"/>
+        <br>
+        <label for="content">Content</label>
+        <textarea formControlName="content" id="content" placeholder="content"></textarea>
+        <br>
+        <input formControlName="active" id="active" type="checkbox" readOnly="true" placeholder="Book Id"/>
+        <label for="active">Active</label>
+        <br>
+        
+
+
+        <input type="button" value ="create" (click) = "createBook()"/>
+    </form>
+</div>
+

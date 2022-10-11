@@ -31,10 +31,10 @@ public class BookController {
     @GetMapping("/search")
     public List<Book> getBooksByParams(@RequestParam String category,
                                        @RequestParam String author,
-                                       @RequestParam Double price,
+                                       @RequestParam String price,
                                        @RequestParam String publisher
     ) throws BookException {
-        return bookService.findBooksByParams(category , author ,price, publisher );
+        return bookService.findBooksByParams(category , author ,Double.valueOf(price), publisher );
     }
 
     @PostMapping("/buy")

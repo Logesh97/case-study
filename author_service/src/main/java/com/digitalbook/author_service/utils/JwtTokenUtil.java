@@ -50,7 +50,10 @@ public class JwtTokenUtil implements Serializable {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", "author");
 		claims.put("date", LocalDateTime.now().toString());
-		claims.put("message", "some other message");
+		claims.put("message", "login success");
+		claims.put("status",true);
+		claims.put("mailId",authorByUsername.getMailId());
+		claims.put("authorId",authorByUsername.getAuthorId());
 		return doGenerateToken(claims, authorByUsername.getUsername());
 	}
 

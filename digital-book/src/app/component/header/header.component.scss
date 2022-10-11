@@ -1,0 +1,20 @@
+div.header{
+    display: flex;
+    background-color: cadetblue;
+    height:20vh;
+    align-items: center;
+}
+
+.logo{
+    height: 60%;
+    margin: 20px 10px;
+    width: 5%;
+    // border-radius: 50%;
+    object-fit: cover;
+   
+}
+
+.logo-container{
+    display: flex;
+
+}

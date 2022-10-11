@@ -1,0 +1,14 @@
+<div class="signup">
+    <form [formGroup] = "signUpForm">
+      <label for="username">Username</label>
+      <input formControlName="username" id="username" type="text" placeholder="username"/>
+      <br>
+      <label for="password">Password</label>
+      <input formControlName="password" id="Password" type="password" placeholder="Password"/>
+      <br>
+      <label for="mailId">Password</label>
+      <input formControlName="mailId" id="mailId" type="text" placeholder="mail id"/>
+      <br>
+      <input type="button" value ="Register" [disabled]="signUpForm.valid" (click) = "signup()"/>
+    </form>
+</div>

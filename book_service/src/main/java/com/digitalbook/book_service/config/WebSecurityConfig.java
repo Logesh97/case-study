@@ -1,5 +1,8 @@
 package com.digitalbook.book_service.config;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +17,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 import com.digitalbook.book_service.filter.JwtRequestFilter;
 
@@ -39,6 +45,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+	
+//	@Bean
+//	public CorsWebFilter corsWebFilter() {
+//		final CorsConfiguration corsConfig = new CorsConfiguration();
+//		corsConfig.setAllowedOrigins(Collections.singletonList("*"));
+//		corsConfig.setMaxAge(3600L);
+//		corsConfig.setAllowedMethods(Arrays.asList("GET", "POST"));
+//		corsConfig.addAllowedHeader("*");
+//		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//		source.registerCorsConfiguration("/**", corsConfig);
+//		return new CorsWebFilter(source);
+//	}
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {

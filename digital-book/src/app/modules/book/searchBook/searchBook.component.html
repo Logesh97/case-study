@@ -1,0 +1,23 @@
+<div class="searchContainer">
+    <p>Search Books!</p>
+    <form [formGroup] = "searchForm">
+        Category : <input formControlName="category" type="text" placeholder="category"/>
+        Author : <input formControlName="author" type="text" placeholder="Author"/>
+        Publisher : <input formControlName="publisher" type="text" placeholder="Publisher"/>
+        Price : <input formControlName="price" type="text" placeholder="Price"/>
+        <input type="button" value="Search" (click) = "getBooks()" />
+    </form>
+
+</div>
+
+<div class="books">
+    <!-- {{books}} -->
+    <div class="card" *ngFor="let book of books ; let id = index;">
+        {{book.title}} <br>
+        {{book.author}} <br>
+        {{book.price}} <br>
+        <button style="background-color:'palegreen'" (click) = "purchaseBook(book)">purchase</button>
+    </div>
+</div>
+
+<!-- <app-home ></app-home> -->
