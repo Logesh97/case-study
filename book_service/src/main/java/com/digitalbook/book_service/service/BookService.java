@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -93,7 +95,8 @@ public class BookService {
 		return books;
 	}
  
-	public String doRefund(String mailId, Long bookId) {
+	public Map<String, String> doRefund(String mailId, Long bookId) {
+		Map<String ,String> resultMap = new HashMap<>();
 		List<Purchase> purchased = purchaseRepository.findByEmail(mailId)
 				.stream()
 				.filter(purchase -> purchase.getBookId().equals(bookId))
@@ -104,10 +107,12 @@ public class BookService {
 			if(duration.toHours() <= 24) {
 				purchaseRepository.deleteById(purchase.getPurchaseId());
 			} else {
-				return "Refund time limit exceeded!!";
+				resultMap.put("result", "Refund time limit exceeded!!");
+				return resultMap;
 			}
 		}
-		return "refunded";
+		resultMap.put("result", "sucess");
+		return resultMap;
 	}
 
 	public String editBook(Book book) throws BookException {
@@ -159,6 +164,10 @@ public class BookService {
 			});
 		}
 		System.out.println("Notification sent!!");
+	}
+
+	public List<Book> fetchByAuthor(String authorId) {
+		return bookRepository.findByAuthor(authorId);
 	}
 	
 }

@@ -12,12 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { PurchaseBookComponent } from './modules/book/purchase-book/purchase-book.component';
 import { CreateBookComponent } from './modules/book/create-book/create-book.component';
 import { MyBooksComponent } from './modules/book/my-books/my-books.component';
+import { UserGuard } from './modules/user/user.guard';
 
 const routes:Routes = [
   {path : 'home/:username' , component : HomeComponent},
   {path : 'purchase/:bookId' , component : PurchaseBookComponent},
-  {path : 'create-book' , component : CreateBookComponent},
-  {path : 'my-book' , component : MyBooksComponent},
+  {path : 'create-book' , component : CreateBookComponent , canActivate:[UserGuard]},
+  {path : 'my-book' , component : MyBooksComponent, canActivate:[UserGuard]},
   {path : 'home' , component : HomeComponent},
   {path : 'book' , loadChildren : () => import("./modules/book/book.module").then(m=>m.BookModule)},
   {path : 'user' , loadChildren : () => import("./modules/user/user.module").then(m=>m.UserModule)},

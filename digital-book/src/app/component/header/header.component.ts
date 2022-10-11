@@ -12,19 +12,22 @@ export class HeaderComponent implements OnInit{
     title:string = "digital book";
 
     loginStatus:any;
-    authorMode:boolean = false;
-    // authorMode:boolean = false;
+    authorMode:boolean;
     constructor(private router:Router , private appComponent:AppComponent){
         this.loginStatus = localStorage.getItem("login-status")
-        this.authorMode = !!this.loginStatus && this.loginStatus['role']
+        this.authorMode = this.loginStatus == null
         console.log("Author mode",this.authorMode);
 
     }
     ngOnInit(): void {
         throw new Error("Method not implemented.");
     }
+    setAuthorMode(isAuthor:boolean){
+        this.authorMode = isAuthor;
+    }
     signout(){
         localStorage.removeItem("login-status");
+        localStorage.removeItem("token");
         this.authorMode = true;
         // window.location.reload();
         // this.authorMode = false;

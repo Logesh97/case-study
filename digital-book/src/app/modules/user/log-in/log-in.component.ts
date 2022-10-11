@@ -32,13 +32,14 @@ export class LogInComponent implements OnInit {
             console.log("Decoded token : ",decodeValue);
             localStorage.setItem("token" , res['token']);
             localStorage.setItem("login-status" , JSON.stringify(decodeValue));
-            this.header.authorMode = true;
+            this.header.setAuthorMode(false);
             if(JSON.parse(localStorage.getItem("login-status") || "")['sub']){
               this.router.navigate(["home",JSON.parse(localStorage.getItem("login-status") || "")['sub']]);
             }
         },
         error : (err:any) => {
           console.log("Error [LogInComponent][login] : ",err);
+          alert("Username/Password wrong!");
         }
       })
   }

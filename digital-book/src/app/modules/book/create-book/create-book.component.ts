@@ -31,6 +31,7 @@ export class CreateBookComponent implements OnInit {
       this.bookService.createBook(this.createBookForm.value).subscribe({
         next : (res:any) => {
             console.log(res);
+            alert("Book created successfully and book id is "+res);
         },
         error : (err:any) =>{
           console.log("");

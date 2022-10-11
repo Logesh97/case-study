@@ -1,9 +1,12 @@
 <div class="header" style="font-family: 'Pacifico', cursive;">
-    <div class="logo-container">
+    <div class="logo-container" routerLink="home">
         <img src="./../../../assets/logo.png" class="logo"/>
         <h1 style="display: inline-block;">{{title}}</h1>
     </div>
 {{authorMode}}
+    <app-button [bgColor] = "'#e6ebf1'" >
+        <a routerLink="book/purchasedBooks" style="text-decoration: none;">Purchased Books</a>
+    </app-button>
     <app-button [bgColor] = "'#e6ebf1'" >
         <a routerLink="book/searchBooks" style="text-decoration: none;">search</a>
     </app-button>

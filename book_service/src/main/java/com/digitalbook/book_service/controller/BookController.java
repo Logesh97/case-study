@@ -1,6 +1,8 @@
 package com.digitalbook.book_service.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,7 @@ public class BookController {
     
     @GetMapping()
     public List<Book> getBooks()  {
-    	return bookService.findAllBooks();
+    	return bookService.findAllBooks().stream().filter(book -> book.isActive()).collect(Collectors.toList());
     }
 
     @GetMapping("/search")
@@ -50,6 +52,11 @@ public class BookController {
     public String editBook(@RequestBody Book book) throws BookException {
     	return bookService.editBook(book);
     }
+    @GetMapping("/fetchByAuthor")
+    public List<Book> fetchByAuthor(@RequestParam String authorId){
+    	return bookService.fetchByAuthor(authorId);
+    	
+    }
     
     @GetMapping("/fetchByMail")
     public List<Book> fetchByMail(@RequestParam String mailId){
@@ -67,7 +74,7 @@ public class BookController {
     	
     }
     @GetMapping("/refund")
-    public String doRefund(@RequestParam String mailId , @RequestParam Long bookId) throws BookException{
+    public Map<String, String> doRefund(@RequestParam String mailId , @RequestParam Long bookId) throws BookException{
     	return bookService.doRefund(mailId , bookId);
     	
     }

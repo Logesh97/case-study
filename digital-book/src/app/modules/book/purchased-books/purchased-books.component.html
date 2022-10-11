@@ -1,0 +1,34 @@
+<p>purchased-books works!</p>
+<input type="checkbox" #mailArea (change) = "toggle(mailArea.value)"/> Enable - update mail ID; Disable - find by purchase
+<div class="purchased-search-container">
+    {{isMailArea}}
+    <div class="by-mail" *ngIf="isMailArea">
+        <input type="text" placeholder="Mail ID" #mail [value]="mailId"/> 
+        <input type="button" value="Register Mail ID" (click) = "storeMail(mail.value)"/>
+    </div>
+    
+    <div class="by-purchaseId" *ngIf="!isMailArea">
+        <input type="text" placeholder="Purchase ID" #pid /> 
+        <input type="button" value="Find by ID" (click) = "findByPurchaseId(pid.value)"/>
+    </div>
+    
+    <!-- <div class="refund">
+        <input type="text" #mail_refund />
+        <input type="text" #pid_refund /> 
+        <input type="button" value="refund"/>
+    </div> -->
+</div>
+
+<div class="books">
+    <!-- {{books}} -->
+    <div class="card" *ngFor="let book of books ; let id = index;">
+        {{book.title}} <br>
+        {{book.author}} <br>
+        {{book.price}} <br>
+        <button style="background-color:'palegreen'" (click) = "read(book)">Read</button>
+        <button style="background-color:'palegreen'" (click) = "refund(book)">Refund</button>
+    </div>
+</div>
+
+
+

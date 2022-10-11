@@ -1,6 +1,7 @@
 package com.digitalbook.author_service.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class AuthorController {
 	}
 	
 	@PutMapping("/{authorId}/books/{bookId}")
-	public String editBook(@PathVariable Long authorId ,
+	public Map<String, String> editBook(@PathVariable Long authorId ,
 			@PathVariable Long bookId , 
 			@RequestBody Book book) throws Exception {
 		return authorService.editBook(authorId ,bookId, book);	

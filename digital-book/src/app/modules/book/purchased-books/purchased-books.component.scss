@@ -1,3 +1,15 @@
+.purchased-search-container{
+    display:flex;
+}
+input{
+    margin: 4px;
+    padding: 4px;
+}
+div{
+    padding: 12px;
+    display:inline-grid;
+}
+
 .books{
     display: flex;
     flex-direction: row;
@@ -15,16 +27,4 @@
     align-items: center;
     margin: 4px;
     padding: 4px;
-}
-
-.edit-book{
-    margin:12px;
-}
-
-label{
-    margin-right: 8px;
-    // padding:8px;
-}
-input{
-    margin-bottom: 10px;
 }
