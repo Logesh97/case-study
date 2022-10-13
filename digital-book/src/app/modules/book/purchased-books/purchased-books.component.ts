@@ -13,7 +13,11 @@ export class PurchasedBooksComponent implements OnInit {
   isMailArea:boolean = false;
   books:Book[] = [];
   mailId:string = this.getMail() || "";
-  constructor(private bookService:BookService, private router:Router) { }
+  constructor(private bookService:BookService, private router:Router) { 
+    if(this.mailId != null && this.mailId !== ""){
+      this.setMailAndLoad();
+    }
+  }
 
   ngOnInit(): void {
   }

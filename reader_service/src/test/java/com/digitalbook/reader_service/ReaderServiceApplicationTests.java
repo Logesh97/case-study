@@ -20,16 +20,17 @@ class ReaderServiceApplicationTests {
 
     @Test
     void testGetPurchasedBooks_case1() {
-    	List<Book> expected = new ArrayList<Book>(); 
-    	expected.add(
-    			new Book("ps2.png","Ponniyin selvan - manimakudam" , "fiction" , 250.5 ,
-    					"kavitha" , "Kavithalaya" , LocalDate.of(2022, 9, 29) , 
-    					"podsdvzhvcjzvcvzcvzxcdfjdkjfkjsdfiug"
-    					+ "adsiufgadsgggggggggggggggggggggggggggggggggggggggggggggg"
-    					+ "gggggrtykuifyesidukjfghisduyfsidgfusdfisdafdhasfdh\\nsdf"
-    					+ "hgasfdhgfahd", true)
-    			);
+//    	List<Book> expected = new ArrayList<Book>(); 
+//    	expected.add(
+//    			new Book("ps2.png","Ponniyin selvan - manimakudam" , "fiction" , 250.5 ,
+//    					"kavitha" , "Kavithalaya" , LocalDate.of(2022, 9, 29) , 
+//    					"podsdvzhvcjzvcvzcvzxcdfjdkjfkjsdfiug"
+//    					+ "adsiufgadsgggggggggggggggggggggggggggggggggggggggggggggg"
+//    					+ "gggggrtykuifyesidukjfghisduyfsidgfusdfisdafdhasfdh\\nsdf"
+//    					+ "hgasfdhgfahd", true)
+//    			);
     	Assertions.assertEquals(1, readerService.getPurchasedBooks("kavi.logesh@kavi.com").get(0).getId());
+    	Assertions.assertEquals(2, readerService.getPurchasedBooks("kavi.logesh@kavi.com").get(0).getId());
     	
     }
     

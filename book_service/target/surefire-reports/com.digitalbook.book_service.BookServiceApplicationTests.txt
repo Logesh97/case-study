@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.digitalbook.book_service.BookServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.449 s - in com.digitalbook.book_service.BookServiceApplicationTests

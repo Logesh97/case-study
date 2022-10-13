@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit{
 
     }
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        //throw new Error("Method not implemented.");
     }
     setAuthorMode(isAuthor:boolean){
         this.authorMode = isAuthor;

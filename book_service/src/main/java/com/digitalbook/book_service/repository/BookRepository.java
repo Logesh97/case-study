@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("select book from Book book where book.active = true and book.category = ?1 or book.author = ?2 or book.price <= ?3 or book.publisher = ?4")
+    @Query("select book from Book book where book.active = true and book.category like ?1 and book.author like ?2 and book.price <= ?3 and book.publisher like ?4")
     List<Book> findAllBooksByParams(String category , String author , Double price , String publisher);
 
 	List<Book> findByAuthor(String author);

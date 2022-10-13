@@ -9,6 +9,7 @@ import { CreateBookComponent } from './create-book/create-book.component';
 import { MyBooksComponent } from './my-books/my-books.component';
 import { PurchasedBooksComponent } from './purchased-books/purchased-books.component';
 import { BookReaderComponent } from './book-reader/book-reader.component';
+import { WordCapitalize } from 'src/app/word.capitalize';
 
 const routes:Routes = [
   {path:'searchBooks' , component : SearchBookComponent},
@@ -21,6 +22,7 @@ const routes:Routes = [
       SearchBookComponent,
       PurchasedBooksComponent,
       BookReaderComponent,
+      WordCapitalize
       // ButtonComponent,
       // HomeComponent
     ],

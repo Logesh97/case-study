@@ -36,6 +36,18 @@ public class BookController {
                                        @RequestParam String price,
                                        @RequestParam String publisher
     ) throws BookException {
+    	if(category != null) {
+    		category = "%%";
+    	}
+    	if(author != null) {
+    		author ="%%";
+    	}
+    	if(price != null) {
+    		price = "99999.999";
+    	}
+    	if(publisher != null) {
+    		publisher = "%%";
+    	}
         return bookService.findBooksByParams(category , author ,Double.valueOf(price), publisher );
     }
 

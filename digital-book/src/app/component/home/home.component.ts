@@ -9,7 +9,7 @@ import { UserModule } from 'src/app/modules/user/user.module';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   username:string = "Reader";
 
   @Input()
@@ -22,6 +22,15 @@ export class HomeComponent {
       console.log(parameters);
       this.username = parameters['username'];
     })
+  }
+  ngOnInit(): void {
+    if(this.username !== null && this.username !== ""){
+      if(localStorage.getItem("login-status") != null){
+        this.username = JSON.parse(localStorage.getItem("login-status") || "")['sub'] || 'Reader';
+      }else{
+        this.username = 'Reader';
+      }
+    }
   }
 
   purchaseBook(book:Book){

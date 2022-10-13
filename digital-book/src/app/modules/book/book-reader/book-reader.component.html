@@ -1,6 +1,8 @@
-<button class="back">back to purchased books>></button>
+<button class="back" routerLink="/book/purchasedBooks">
+    <a routerLink="book/purchasedBooks" style="text-decoration: none;">back to purchased books>></a>
+</button>
 <div class="book">
     <h1>{{book.title}}</h1>
-    <h2>{{book.author}}</h2>
+    <h2>{{book.author | wordCapitalize}}</h2>
     <p>{{book.content}}</p>
 </div>

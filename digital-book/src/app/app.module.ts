@@ -13,6 +13,7 @@ import { PurchaseBookComponent } from './modules/book/purchase-book/purchase-boo
 import { CreateBookComponent } from './modules/book/create-book/create-book.component';
 import { MyBooksComponent } from './modules/book/my-books/my-books.component';
 import { UserGuard } from './modules/user/user.guard';
+import { WordCapitalize } from './word.capitalize';
 
 const routes:Routes = [
   {path : 'home/:username' , component : HomeComponent},
@@ -31,7 +32,8 @@ const routes:Routes = [
     HomeComponent,
     PurchaseBookComponent,
     CreateBookComponent,
-    MyBooksComponent
+    MyBooksComponent,
+    WordCapitalize
     // SearchBookComponent
   ],
   imports: [
